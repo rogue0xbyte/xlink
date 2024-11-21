@@ -1,0 +1,6 @@
+bs4==0.0.2
+Flask==2.0.3
+gunicorn==23.0.0
+numpy==2.0.1
+pandas==2.2.2
+requests==2.32.3
