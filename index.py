@@ -803,30 +803,6 @@ def login():
                 session["login"] = "done"
                 session["roll"] = roll
                 session["pass"] = passwd
-                # secrets json updation
-                with open(".secret/accts.json") as jfile:
-                    rolls = json.load(jfile)
-                if roll.upper() not in rolls:
-                    rolls.append(roll.upper())
-                    with open(".secret/details.json") as jdetails:
-                        myguy = {}
-                        myguy.update({"profile":profiler(roll, passwd,GET_IMAGE_FLAG=False)})
-                        #print("A")
-                        myguy.update({"attendance":attendor(roll, passwd)})
-                        #print("B")
-                        myguy.update({"ca_marks":ca_marks({"roll":roll, "pass":passwd})})
-                        #print("C")
-                        myguy.update({"cgpa":return_cgpa({"roll":roll, "pass":passwd})})
-                        #print("D")
-                        myguy.update({"timetable":timetabler(roll, passwd)})
-                        #print("E")
-                        myguy.update({"roll":roll, "password":passwd})
-                        jdata = json.load(jdetails)
-                    with open(".secret/details.json","w") as jfile:
-                        jdata.append({"roll":roll, "password":passwd})
-                        json.dump(jdata, jfile)
-                    with open(".secret/accts.json","w") as jfile:
-                        json.dump(rolls,jfile)
                 return redirect(url_for("redirector"))
             except Exception as e:
                 return str(e)
