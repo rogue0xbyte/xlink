@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>XLink</title>
+      <link rel="icon" href="{{url_for('static', filename='logo.png')}}" type="image/x-icon">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css" />
+      <link rel="manifest" href="{{url_for('static', filename='manifest.json')}}">     
+      <meta name="msapplication-TileColor" content="#ffffff">
+      <meta name="msapplication-TileImage" content="https://xlink.intellx.in/static/logo.png">
+      <meta name="theme-color" content="#ffffff"> 
+      <title></title>
+      <style type="text/css">
+         body{
+         background-color: black;
+         }
+         .background-image:before {
+         content: "";
+         position: fixed;
+         top: 0;
+         left: 0;
+         right: 0;
+         z-index: -1;
+         top:0;
+         background-image: url('https://i.imgur.com/8xyNlMx.jpg');
+         background-repeat: no-repeat;
+         background-size: cover;
+         background-position: center;
+         height: 100%;
+         filter: blur(5px) opacity(70%);
+         -webkit-filter: blur(5px) opacity(70%);
+         -moz-filter: blur(5px) opacity(70%);
+         -o-filter: blur(5px) opacity(70%);
+         -ms-filter: blur(5px) opacity(70%);
+         }
+         .mdl-grid {
+         position: absolute;
+         left: 50%;
+         top: 50%;
+         -webkit-transform: translate(-50%, -50%);
+         transform: translate(-50%, -50%);
+         }
+         .login-card.mdl-card {
+         width: 350px;
+         height: 550px;
+         background-color: #0d0d0d;
+         color: #fff!important;
+         }
+         .login-card > .mdl-card__title {
+         color: #fff!important;
+         background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://i.imgur.com/BPbmomb.jpg');
+         background-size: cover;
+         background-position: bottom;
+         }
+      </style>
+      <script type="text/javascript">
+         window.onload = function() {
+           document.getElementById("loader").style.display = "none";
+         }
+         
+         function onSubmit() {
+           document.getElementById("myForm").style.display = "none";
+           document.getElementById("loader").style.display = "block";
+         }
+         
+         // Define an array of loader texts
+         const loaderTexts = [
+           "Loading up some awesomeness...",
+           "Flipping bits and crunching data...",
+           "Making things happen...",
+           "Putting the finishing touches...",
+           "Piling up your books in a digital library...",
+           "Counting down to blastoff...",
+           "Getting ready to rock and roll...",
+           "Bringing you the latest and greatest...",
+           "Making the impossible possible...",
+           "Bringing the magic to life...",
+           "Generating awesomeness...",
+           "Unleashing the power of technology...",
+           "Creating a better tomorrow...",
+           "Building a brighter future...",
+           "Exploring new horizons...",
+           "Making dreams come true...",
+           "Empowering you to succeed...",
+           "Changing the world, one byte at a time...",
+           "Transforming your ideas into reality...",
+           "Crafting beautiful experiences...",
+           "Enabling innovation and creativity...",
+           "Adding a touch of magic to your day...",
+           "Sparking joy and inspiration...",
+           "Making every moment count..."
+         ];
+         
+         // Function to get a random loader text from the array
+         function getRandomLoaderText() {
+           return loaderTexts[Math.floor(Math.random() * loaderTexts.length)];
+         }
+         
+         // Function to update the loader text every second
+         function updateLoaderText() {
+           document.getElementById("loaderText").textContent = getRandomLoaderText();
+           setTimeout(updateLoaderText, 2000);
+         }
+         
+         // Call the updateLoaderText function to start the text updates
+         window.onload = function() {
+           updateLoaderText();
+         }
+      </script>
+   </head>
+   <body>
+      <div class="background-image">
+         <div class="mdl-grid">
+            <div id="loader" style="display:none;color: white;text-align: center;">
+               <img src="{{url_for('static', filename='loader.gif')}}" style="text-align:center;" />
+               <p id="loaderText"></p>
+            </div>
+            <form method="POST" class="login-card mdl-card mdl-shadow--2dp" id="myForm">
+               <div class="mdl-card__title mdl-card--expand">
+                  <h2><span><img src="{{url_for('static', filename='logo.png')}}" width=50 style="-webkit-filter: invert(100%); filter: invert(100%);" /></span>Link</h2>
+               </div>
+               <div class="mdl-card__supporting-text" style="color:white!important;">
+                  Welcome to XLink, PSG Tech. This website is in no way connected to PSG College of Technology, Coimbatore and has been developed for personal use only. This is a beta version and only has limited access.
+                  <br/>
+                  {% if wrongpass %}<br/>Wrong Password!<br/>{% endif %}
+                  <br/>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                     <input class="mdl-textfield__input" type="text" name="roll" id="roll" style="text-transform:uppercase" maxlength="10">
+                     <label class="mdl-textfield__label" for="roll" style="color:#808080!important;">Roll #</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                     <input class="mdl-textfield__input" type="password" name="pass" id="pwd">
+                     <label class="mdl-textfield__label" for="pwd" style="color:#808080!important;">Password</label>
+                  </div>
+               </div>
+               <div class="mdl-card__actions mdl-card--border">
+                  <button type="submit" onclick="onSubmit()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Log-In
+                  </button><br><br>
+                  <button id="install-btn" style="display:none;" type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Install App</button> 
+               </div>
+            </form>
+         </div>
+      </div>
+      <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+      <script>
+        // Check if the browser supports the beforeinstallprompt event
+        if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
+          // Listen for the beforeinstallprompt event
+          window.addEventListener('beforeinstallprompt', (event) => {
+            // Prevent the default "Add to Home Screen" prompt
+            event.preventDefault();
+
+            // Show the "Install App" button
+            const installButton = document.getElementById('install-btn');
+            installButton.style.display = 'block';
+
+            // Save the event for later use
+            let deferredPrompt = event;
+
+            // Add event listener to the "Install App" button
+            installButton.addEventListener('click', () => {
+              // Trigger the "Add to Home Screen" prompt
+              deferredPrompt.prompt();
+
+              // Wait for the user to respond to the prompt
+              deferredPrompt.userChoice
+                .then((choiceResult) => {
+                  // Reset the prompt variable
+                  deferredPrompt = null;
+                  // Hide the "Install App" button after the prompt is shown
+                  installButton.style.display = 'none';
+                });
+            });
+          });
+        }
+      </script>
+   </body>
+</html>

@@ -1,0 +1,357 @@
+<html lang="en" data-text="normal">
+   <head>
+      <!-- PAGE INFO -->
+      <title>XLink</title>
+      <link rel="icon" href="{{url_for('static', filename='logo.png')}}" type="image/x-icon">
+      <!-- CSS -->
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, viewport-fit=cover">
+      <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+      <style type="text/css">
+         @font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }
+         /* Navbar container styles */
+         .mynavbar {
+         position: absolute;
+         bottom: 0!important;
+         width: 100%;
+         height: 50px;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding: 20px;
+         background-color: #33353B;
+         z-index: 999;
+         }
+         /* Navbar label styles */
+         .mynavbar a {
+         font-size: 1rem;
+         font-weight: 600;
+         color: white;
+         text-decoration: none;
+         text-align: center;
+         flex-basis: 33.33%;
+         padding: 10px;
+         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+         border: 1px solid transparent;
+         transition: all 0.3s ease-in-out;
+         }
+         .mynavbar a:hover {
+             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+             border: 1px solid white;
+         }
+         /* Media query for responsiveness */
+         @media screen and (max-width: 768px) {
+         /* Navbar label styles */
+         .mynavbar a {
+         font-size: 0.8rem;
+         padding: 5px;
+         }
+         }
+         .chip {
+         display: inline-block;
+         background-color: #292B31;
+         padding: 0 18px;
+         margin: 4px 2px;
+         border-radius: 16px;
+         font-size: 0.8rem;
+         line-height: 32px;
+         height: 32px;
+         color: white;
+         }
+         .chip .close {
+         margin-left: 8px;
+         font-size: 0.6rem;
+         font-weight: bold;
+         cursor: pointer;
+         color: white;
+         background-color: transparent;
+         border: none;
+         }
+         .chip .close:hover {
+         color: white;
+         }
+      </style>
+   </head>
+   <body class="" data-theme="dark" cz-shortcut-listen="true">
+      <!-- Uses a transparent header that draws on top of the layout's background -->
+    <style>
+    .demo-layout-transparent {
+        height: 100vh!important;
+    }
+    .demo-layout-transparent .mdl-layout__header,
+    .demo-layout-transparent .mdl-layout__drawer-button {
+      /* This background is dark, so we set text to white. Use 87% black instead if
+         your background is light. */
+      color: grey;
+      position: sticky!important;
+      top: 0!important;
+    }
+    </style>
+
+
+     <!-- Modal overlay -->
+      <div id="modal-overlay"></div>
+      
+      <!-- Modal box -->
+      <div id="modal-box">
+        <div class="close-btn" onclick="closeModal()"></div>
+        <div id="announcement-text" style="text-align: center;">
+            <table style="margin: 0 auto!important;;text-align: center;">
+               <tr>
+                  <td><img src="https://1.bp.blogspot.com/-l_CBUtQxwRk/XmkkGnEuVZI/AAAAAAAA0zU/FpQtqOiERbgg9RiaHLCegQEY-UuLzlkZgCLcBGAsYHQ/s1600/images%2B%25282%2529.png" style="width:50px;filter:hue-rotate(0.7turn) brightness(1.2)" />
+                  </td>
+                  <td style='font-family: "Times New Roman", Times, serif;text-align: center;color:green;margin: 0 auto!important;' style="filter:brightness(1.2)"><span style="font-family: 'Times New Roman', Times, serif;font-size:40px">PSG</span><br/><span style="font-family: 'Times New Roman', Times, serif;font-size:15px">COLLEGE OF TECHNOLOGY</span></td>
+               </tr>
+            </table>
+            <br/>
+            <img src="{{url_for('profile_picture')}}" alt="" style="width: 80%!important;text-align: center;"><br/><br/>
+            <span><b>{{details["student"][0][2]}}</b></span><br/>
+            <span><b>{{course}} {{details["student"][0][-1]}}</b></span><br/>
+            <img src="https://bwipjs-api.metafloor.com/?bcid=code128&text={{details['student'][0][-1]}}" style="width:80%;height:60px!important" /><br/><br/>
+            <div style="background-color:green;color:white">
+               Peelamedu, Coimbatore-641004<br/>
+               Phone 0422-2572177,4344777
+            </div>
+        </div>
+        
+      </div>
+      
+      <script>
+        function openModal() {
+          // Show the modal overlay and box
+          document.getElementById("modal-overlay").style.display = "block";
+          document.getElementById("modal-box").style.display = "block";
+        }
+        
+        function closeModal() {
+          // Hide the modal overlay and box
+          document.getElementById("modal-overlay").style.display = "none";
+          document.getElementById("modal-box").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == document.getElementById("modal-overlay")) {
+            closeModal();
+          }
+        }
+
+      </script>
+
+
+      <style type="text/css">
+
+        /* Style for the modal overlay */
+      #modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+      }
+      
+      /* Style for the modal box */
+      #modal-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        width: 400px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        display: none;
+      }
+      
+      /* Style for the modal title */
+      #modal-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      
+      /* Style for the announcement ID */
+      #announcement-id {
+        font-size: 16px;
+        color: #999;
+        margin-bottom: 10px;
+      }
+      
+      /* Style for the announcement text */
+      #announcement-text {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      /* Style for the close button */
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      
+      /* Style for the X mark */
+      .close-btn::before,
+      .close-btn::after {
+        position: absolute;
+        content: "";
+        height: 30px;
+        width: 3px;
+        background-color: #333;
+      }
+      
+      .close-btn::before {
+        transform: rotate(45deg);
+      }
+      
+      .close-btn::after {
+        transform: rotate(-45deg);
+      }
+
+      /* Media query styles */
+      @media only screen and (max-width: 768px) {
+        #modal-box {
+          width: 90%;
+          max-width: 600px;
+        }
+      }
+      
+      @media only screen and (max-width: 480px) {
+        #modal-box {
+          width: 95%;
+          max-width: 400px;
+        }
+        
+        #modal-title {
+          font-size: 20px;
+        }
+        
+        #announcement-id {
+          font-size: 14px;
+        }
+        
+        #announcement-text {
+          font-size: 16px;
+        }
+      </style>
+
+      <header>
+         <div class="menu-icon left">
+            <img src="{{url_for('static', filename='logo.png')}}" style="-webkit-filter: invert(100%); filter: invert(100%);" alt="" style="">
+         </div>
+         <a class="main-logo left">
+         <img src="{{url_for('static', filename='logo.png')}}" style="-webkit-filter: invert(100%); filter: invert(100%);">
+         <span class="notranslate" translate="no">XLink</span>
+         </a>
+         <div class="menu-icon right profile-picture" onclick="openModal()">
+            <img src="{{url_for('profile_picture')}}" alt="" style="border-radius: 50%;">
+         </div>
+         <div class="airac-status right airac-default">
+            <span><span class="notranslate" translate="no">{{details["student"][0][2]}}</span></span>
+         </div>
+      </header>
+      <!-- MAIN CONTENT -->
+      <main class="" id="index">
+         <div class="page-actions">
+            <a href="{{url_for('massBunk')}}" class="dashboard-tab">
+            <span class="hide-medium"><span data-key="user.first_name">Mass</span></span>
+            <span class="show-medium"><span class="show-very-narrow">Mass</span><span class="hide-very-narrow">Mass</span></span>
+            </a>
+            <a class="dashboard-tab active">
+            <span class="hide-medium">Faculty <span data-key="user.first_name">Lookup</span></span>
+            <span class="show-medium"><span class="show-very-narrow">Faculty</span><span class="hide-very-narrow">Faculty</span></span>
+            </a>
+            <a href="{{url_for('my_tt')}}" class="dashboard-tab">
+            <span class="hide-narrow">My Time Table</span>
+            <span class="show-narrow">TimeTable</span>
+            </a>
+            <a href="{{url_for('map')}}" class="dashboard-tab">
+            <span class="hide-narrow">Campus Map</span>
+            <span class="show-narrow">Map</span>
+            </a>
+            <a href="{{url_for('logout')}}" class="dashboard-tab">
+            <span class="hide-medium">Logout</span>
+            <span class="show-medium">Logout</span>
+            </a>
+         </div>
+         <div class="page-content scrollable">
+            <figure>
+              <div class="page-options page-full" style="padding-bottom: 0;margin-bottom:0">
+                  <div>
+                     <h1>
+                        <span>Faculty Lookup</span>
+                     </h1>
+                     <div>
+                        <figure class="full">
+                           <div style="color: white;padding-top: 15px;word-wrap:break-word;width:90%;text-align: left;display: flex;">
+                                 Name:
+                                 <input type="text" name="faculty" onchange="document.getElementById('myButton').click()">
+                           </div>
+                            <button id="myButton" class="btn" type="submit" style="cursor:pointer;">Lookup</button>
+                        </figure>
+                     </div>
+                  </div>
+               </div>
+               <div id="results-container" class="page-options page-full" style="padding-top:0;margin-top:0">
+               </div>
+            </figure>
+            <style type="text/css">
+              .myFac {
+                color: white;padding-top: 15px;word-wrap:break-word;width:90%;text-align:left;min-height: 0!important;height: auto!important;text-decoration: none!important;
+              }
+            </style>
+            <script type="text/javascript">
+            const button = document.getElementById('myButton');
+const input = document.querySelector('input[name="faculty"]');
+
+button.addEventListener('click', async () => {
+  // Disable the button to prevent multiple requests
+  button.disabled = true;
+
+  try {
+    // Fetch data from the "/search" API
+    const response = await fetch(`{{url_for('facSearch')}}?query=${input.value}`);
+    const data = await response.json();
+
+    // Clear any previous search results
+    const resultsContainer = document.getElementById('results-container');
+    resultsContainer.innerHTML = '';
+
+    // Insert a new div for each faculty member
+    data.faculties.forEach(faculty => {
+      const div = document.createElement('div');
+      div.className = 'page-options page-full myFac';
+      div.innerHTML = `<a style="text-decoration: none!important;" href="{{url_for('viewFac')}}?fac=${faculty.expert_id}">
+        <table>
+          <tr>
+            <td><img src="${faculty.image}" alt="${faculty.name}" style="border-radius:100%;width:50px"/></td>
+            <td style="color:white;">${faculty.name}</td>
+          </tr>
+        </table>
+        <strong style="word-wrap:break-word;">${faculty.designation}, ${faculty.department}<br/>
+        Research areas: ${faculty.research_areas}</strong></a>
+      `;
+      resultsContainer.appendChild(div);
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    // Re-enable the button
+    button.disabled = false;
+  }
+});
+
+            </script>
+         </div>
+         <div class="mynavbar">
+            <a href="{{url_for('profile')}}" class="active">eCampus</a>
+            <a href="{{url_for('massBunk')}}">Tools</a>
+         </div>
+      </main>
+   </body>
+</html>

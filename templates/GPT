@@ -1,0 +1,117 @@
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.xLnk-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #F5F5F5; /* light grey background color */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 8px 8px 16px #D9D9D9, -8px -8px 16px #FFFFFF; /* add white neumorphic box-shadow effect */
+}
+
+.xLnk-th,
+.xLnk-td {
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333333; /* dark font color for table headers and cells */
+}
+
+.xLnk-th {
+  background-color: #F5F5F5; /* light grey background color for table headers */
+}
+
+.xLnk-tr:hover {
+  transform: translateY(-2px); /* add smooth hover animation */
+}
+
+.xLnk-td {
+  background-color: #FFFFFF; /* white background color for table cells */
+}
+
+.xLnk-td:hover {
+  background-color: #F2F2F2; /* lighter grey background color for table cells on hover */
+}
+
+@media only screen and (max-width: 768px) {
+  /* Adjust table styling for small phones */
+  .xLnk-th,
+  .xLnk-td {
+    padding: 6px;
+    font-size: 12px;
+  }
+  
+  .xLnk-th {
+    display: none; /* Hide table headers on small phones */
+  }
+  
+  .xLnk-td:first-child {
+    font-weight: 600; /* Make the first column bold on small phones */
+  }
+  
+  .xLnk-tr {
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 8px 8px 16px #D9D9D9, -8px -8px 16px #FFFFFF; /* add white neumorphic box-shadow effect */
+  }
+  
+  .xLnk-td:before {
+    /* Add content before each cell on small phones */
+    content: attr(data-label);
+    float: left;
+    font-weight: 600;
+    margin-right: 10px;
+  }
+  
+  .xLnk-td:last-child {
+    /* Remove the right border on the last cell of each row on small phones */
+    border-right: none;
+  }
+}
+
+@media print {
+  @page {
+    size: landscape;
+  }
+}
+</style>
+<table class="xLnk-table">
+  <tr>
+    <th class="xLnk-th">Day</th>
+    <th class="xLnk-th">8.30</th>
+    <th class="xLnk-th">9.20</th>
+    <th class="xLnk-th">10.30</th>
+    <th class="xLnk-th">11.20</th>
+    <th class="xLnk-th">1.40</th>
+    <th class="xLnk-th">2.30</th>
+    <th class="xLnk-th">3.30</th>
+    <th class="xLnk-th">4.20</th>
+  </tr>
+  {% for day in data %}
+   <tr class="xLnk-tr">
+     <td class="xLnk-td">{{ ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][loop.index0] }}</td>
+     {% for i in range(0, 9) %}
+       {% if i <= (day|length - 1) %}
+         <td class="xLnk-td">{% if day[i]!="[] None" %}{{ day[i] }}{% endif%}</td>
+       {% else %}
+         <td class="xLnk-td"></td>
+       {% endif %}
+     {% endfor %}
+   </tr>
+ {% endfor %}
+</table>
+
+<script>
+  window.onload = function() {
+    window.print();
+  };
+</script>
